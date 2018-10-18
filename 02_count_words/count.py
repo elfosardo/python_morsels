@@ -1,22 +1,11 @@
+
 import re
+from collections import Counter
 
 
 def count_words(phrase):
-    phrase_list = []
-    phrase_dict = {}
-    phrase_tuple = phrase.lower().split()
-
-    for word in phrase_tuple:
-        if re.search(r'[^a-z]', word[0]):
-            word = word.lstrip(word[0])
-        if re.search(r'[^a-z]', word[-1]):
-            word = word.rstrip(word[-1])
-        phrase_list.append(word)
-
-    for word in phrase_list:
-        phrase_dict[word] = phrase_list.count(word)
-
-    return phrase_dict
+    """Return the number of times each word occurs in the phrase."""
+    return Counter(re.findall(r"[\w'-]+", phrase.lower()))
 
 
 if __name__ == '__main__':
