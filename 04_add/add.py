@@ -1,7 +1,17 @@
+def check_len(list_to_check):
+    iter_list = iter(list_to_check)
+    list_len = len(next(iter_list))
+    if not all(len(k) == list_len for k in iter_list):
+        raise ValueError
+
+
 def add(*lists_of_int):
     add_list = []
 
+    check_len(lists_of_int)
+
     for blah in zip(*lists_of_int):
+        check_len(blah)
         element = [sum(k) for k in zip(*blah)]
         add_list.append(element)
 
@@ -20,3 +30,10 @@ if __name__ == '__main__':
     print(add(matrix1, matrix2))
 
     print(add([[1, 9], [7, 3]], [[5, -4], [3, 3]], [[2, 3], [-3, 1]]))
+
+    print(add([[1, 9], [7, 3]], [[1, 2], [3]]))
+
+    m1 = [[6, 6], [3, 1]]
+    m2 = [[1, 2], [3, 4], [5, 6]]
+
+    print(add(m1, m2))
